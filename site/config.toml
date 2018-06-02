@@ -1,7 +1,29 @@
 baseurl = "/"
 languageCode = "en-us"
 languageLang = "en"
-title = "My new Victor-Hugo site"
+title = "cole lyman"
+author = "Cole Lyman"
+
+theme = "indieweb-lanyon-hugo"
+contentdir = "content"
+layoutdir = "layouts"
+publishdir = "public"
+pygmentsuseclasses = true
+pygmentsstyle = "emacs"
+
+[permalinks]
+post = ":year/:month/:day/:title/"
+fixed = ":title/"
+
+[params]
+Title = "cole lyman"
+Tagline = "Bioinformatics, Emacs, Programming, and Life"
+Author = "Cole Lyman"
+DateForm = "Jan 2 2006"
+
+  [params.Github]
+  Url = "http://github.com/Colelyman/indieweb-lanyon-hugo"
+  Head = "master"
 
 # RSS, categories and tags disabled for an easy start
 # See configuration options for more details: 
