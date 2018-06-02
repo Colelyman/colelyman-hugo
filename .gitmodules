@@ -1,0 +1,6 @@
+[submodule "site/themes/lanyon-hugo"]
+	path = site/themes/lanyon-hugo
+	url = git@github.com:tummychow/lanyon-hugo.git
+[submodule "site/themes/indieweb-lanyon-hugo"]
+	path = site/themes/indieweb-lanyon-hugo
+	url = git@github.com:Colelyman/indieweb-lanyon-hugo.git
