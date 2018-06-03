@@ -30,6 +30,11 @@ DateForm = "Jan 2 2006"
   Github = "Colelyman"
   Email = "cole@colelyman.com"
 
+  [params.Webmention]
+  Domain = "http://colelyman.com/"
+  Endpoint = "https://webmention.io/"
+  Account = "colelyman.com"
+
 # RSS, categories and tags disabled for an easy start
 # See configuration options for more details: 
 # https://gohugo.io/getting-started/configuration/#toml-configuration
