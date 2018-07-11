@@ -3,4 +3,4 @@
 	url = git@github.com:tummychow/lanyon-hugo.git
 [submodule "site/themes/indieweb-lanyon-hugo"]
 	path = site/themes/indieweb-lanyon-hugo
-	url = git@github.com:Colelyman/indieweb-lanyon-hugo.git
+	url = git@github.com:Colelyman/colelyman-hugo-theme.git
