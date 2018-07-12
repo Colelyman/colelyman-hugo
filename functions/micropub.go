@@ -55,6 +55,7 @@ func checkAccess(token string) (bool, error) {
 			errors.New("Error parsing the response for checking token access")
 	}
 	var indieAuthRes = new(IndieAuthRes)
+	fmt.Println(res.Body)
 	fmt.Println(body)
 	err = json.Unmarshal(body, &indieAuthRes)
 	if err != nil {
