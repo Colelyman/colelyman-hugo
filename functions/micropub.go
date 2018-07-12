@@ -39,8 +39,9 @@ func checkAccess(token string) (bool, error) {
 		return false,
 			errors.New("Error making the request for checking token access")
 	}
-	req.Header.Add("Accept", "application/json")
-	req.Header.Add("Authorization", token)
+	req.Header.Set("Accept", "application/json")
+	req.Header.Set("Authorization", token)
+	fmt.Println(token)
 	fmt.Println(req)
 	// send the request
 	res, err := client.Do(req)
