@@ -1,7 +1,9 @@
 [build]
-  command = "npm run build"
+  command = "npm run build && make"
   publish = "dist"
-  functions = "./functions"
+  functions = "functions"
+[build.environment]
+  GO_IMPORT_PATH = "github.com/Colelyman/colelyman-hugo"
 
 [context.deploy-preview]
   command = "npm run build-preview"
