@@ -45,8 +45,7 @@ func checkAccess(token string) (bool, error) {
 	}
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("Authorization", token)
-	fmt.Println(token)
-	fmt.Println(req)
+	// fmt.Println(req)
 	// send the request
 	res, err := client.Do(req)
 	if err != nil {
@@ -61,7 +60,7 @@ func checkAccess(token string) (bool, error) {
 			errors.New("Error parsing the response for checking token access")
 	}
 	var indieAuthRes = new(IndieAuthRes)
-	// fmt.Println(string(body[:]))
+	fmt.Println(string(body[:]))
 	err = json.Unmarshal(body, &indieAuthRes)
 	if err != nil {
 		return false,
@@ -104,7 +103,6 @@ func checkAuthorization(bodyValues url.Values, req events.APIGatewayProxyRequest
 	}
 
 	// var err string
-	fmt.Println("Token in checkAuthorization " + token)
 	if ok, err := checkAccess(token); ok {
 		location, err := createEntry(bodyValues)
 		if err != nil {
