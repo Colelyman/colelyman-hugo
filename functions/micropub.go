@@ -41,6 +41,7 @@ func checkAccess(token string) (bool, error) {
 	}
 	req.Header.Add("Accept", "application/json")
 	req.Header.Add("Authorization", token)
+	fmt.Println(req)
 	// send the request
 	res, err := client.Do(req)
 	if err != nil {
