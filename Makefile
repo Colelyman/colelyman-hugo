@@ -2,4 +2,5 @@
 all: build
 
 build:
-	go build -o functions/micropub ./functions/micropub.go
+	go get ./functions/...
+	go build -o functions/micropub ./functions/...
