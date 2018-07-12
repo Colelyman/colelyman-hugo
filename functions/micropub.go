@@ -32,6 +32,10 @@ func createEntry(bodyValues url.Values) (location string, err error) {
 }
 
 func checkAccess(token string) (bool, error) {
+	if token == "" {
+		return false,
+			errors.New("Token string is empty")
+	}
 	// form the request to check the token
 	client := &http.Client{}
 	req, err := http.NewRequest("GET", "https://tokens.indieauth.com/token", nil)
@@ -85,9 +89,9 @@ func checkAccess(token string) (bool, error) {
 }
 
 func checkAuthorization(bodyValues url.Values, req events.APIGatewayProxyRequest) (*events.APIGatewayProxyResponse, error) {
-	var token string
 	// check the headers for authorization first
-	if token, ok := req.Headers["authorization"]; ok {
+	token, ok := req.Headers["authorization"]
+	if ok {
 		fmt.Println("Authorization header exists: " + token)
 	} else if token, ok := bodyValues["access_token"]; ok {
 		token := "Bearer " + token[0]
@@ -100,6 +104,7 @@ func checkAuthorization(bodyValues url.Values, req events.APIGatewayProxyRequest
 	}
 
 	// var err string
+	fmt.Println("Token in checkAuthorization " + token)
 	if ok, err := checkAccess(token); ok {
 		location, err := createEntry(bodyValues)
 		if err != nil {
