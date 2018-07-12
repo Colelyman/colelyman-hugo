@@ -57,7 +57,7 @@ func checkAccess(token string) (bool, error) {
 	err = json.Unmarshal(body, &indieAuthRes)
 	if err != nil {
 		return false,
-			errors.New("Error parsing the response into json for checking token access")
+			errors.New("Error parsing the response into json for checking token access " + err.Error())
 	}
 
 	// verify results of the response
@@ -68,8 +68,9 @@ func checkAccess(token string) (bool, error) {
 	scopes := strings.Fields(indieAuthRes.Scope)
 	postPresent := false
 	for _, scope := range scopes {
-		if scope == "post" {
+		if scope == "post" || scope == "create" || scope == "update" {
 			postPresent = true
+			break
 		}
 	}
 	if !postPresent {
