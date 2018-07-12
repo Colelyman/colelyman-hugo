@@ -125,10 +125,7 @@ func checkContentType(req events.APIGatewayProxyRequest) (*events.APIGatewayProx
 					StatusCode: 400,
 					Body:       "Bad Request, error parsing the body of the request",
 				}, errors.New("Error parsing the body of the request")
-			} else if val, ok := bodyValues["h"]; ok && val[0] == "entry" {
-				fmt.Println(val[0])
-				fmt.Println(val[0] == "entry")
-				fmt.Println(bodyValues)
+			} else if val, ok := bodyValues["h"]; !ok || val[0] != "entry" {
 				return &events.APIGatewayProxyResponse{
 					StatusCode: 400,
 					Body:       "Bad Request, either there is no h value in the body or its value is not entry",
