@@ -1,6 +1,7 @@
 package main
 
 import (
+	"bytes"
 	"encoding/json"
 	"errors"
 	"fmt"
@@ -55,8 +56,8 @@ func checkAccess(token string) (bool, error) {
 			errors.New("Error parsing the response for checking token access")
 	}
 	var indieAuthRes = new(IndieAuthRes)
-	fmt.Println(res.Body)
-	fmt.Println(body)
+	n := bytes.IndexByte(body, 0)
+	fmt.Println(string(body[:n]))
 	err = json.Unmarshal(body, &indieAuthRes)
 	if err != nil {
 		return false,
