@@ -8,6 +8,10 @@ import (
 	"github.com/aws/aws-lambda-go/lambda"
 )
 
+func checkAuthorization(token string) bool {
+	return false
+}
+
 func handler(request events.APIGatewayProxyRequest) (*events.APIGatewayProxyResponse, error) {
 	// a handler for GET requests, used for troubleshooting
 	if request.HTTPMethod == "GET" {
@@ -23,10 +27,33 @@ func handler(request events.APIGatewayProxyRequest) (*events.APIGatewayProxyResp
 			Body:       "The HTTP method is not allowed, make a POST request",
 		}, errors.New("HTTP method is not valid")
 	}
+	fmt.Println(request.Headers)
 	fmt.Println(request.Body)
+
+	// TODO Validate the token via tokens.indieauth.com
+	if token, ok := request.Headers["Authorization"]; ok {
+		fmt.Println("Authorization header exists: " + token)
+		if checkAuthorization(token) {
+			// process request
+		} else {
+			return &events.APIGatewayProxyResponse{
+				StatusCode: 403,
+				Body:       "Forbidden, the provided access token does not grant permission",
+			}, errors.New("The provided access token does not grant permission")
+		}
+	} else {
+		return &events.APIGatewayProxyResponse{
+			StatusCode: 401,
+			Body:       "Unauthorized, access token was not provided",
+		}, errors.New("Access token was not provided")
+	}
+	// TODO Make sure that the access token is still valid
+	// TODO Validate the request parameters
+	loc := "http://colelyman.com"
+	// the post was successfully created!
 	return &events.APIGatewayProxyResponse{
-		StatusCode: 200,
-		Body:       "Hello, World",
+		StatusCode: 201,
+		Headers:    map[string]string{"Location": loc},
 	}, nil
 }
 
