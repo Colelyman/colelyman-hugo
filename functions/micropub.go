@@ -68,8 +68,8 @@ func checkAccess(token string) (bool, error) {
 	}
 
 	// verify results of the response
-	if indieAuthRes.Me != "http:\\/\\/colelyman.com\\/" {
-		fmt.Println(indieAuthRes.Me + " != http:\\/\\/colelyman.com\\/")
+	if indieAuthRes.Me != "http://colelyman.com/" {
+		fmt.Println(indieAuthRes.Me + " != http://colelyman.com/")
 		return false,
 			errors.New("Me does not match")
 	}
