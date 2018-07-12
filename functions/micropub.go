@@ -47,6 +47,7 @@ func checkAccess(token string) (bool, error) {
 		return false,
 			errors.New("Error sending the request for checking token access")
 	}
+	defer res.Body.Close()
 	// parse the response
 	body, err := ioutil.ReadAll(res.Body)
 	if err != nil {
@@ -54,6 +55,7 @@ func checkAccess(token string) (bool, error) {
 			errors.New("Error parsing the response for checking token access")
 	}
 	var indieAuthRes = new(IndieAuthRes)
+	fmt.Println(body)
 	err = json.Unmarshal(body, &indieAuthRes)
 	if err != nil {
 		return false,
