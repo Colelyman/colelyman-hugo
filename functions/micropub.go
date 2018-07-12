@@ -3,6 +3,7 @@ package main
 import (
 	"errors"
 	"fmt"
+	"net/url"
 
 	"github.com/aws/aws-lambda-go/events"
 	"github.com/aws/aws-lambda-go/lambda"
@@ -30,8 +31,22 @@ func handler(request events.APIGatewayProxyRequest) (*events.APIGatewayProxyResp
 	fmt.Println(request.Headers)
 	fmt.Println(request.Body)
 
+	// check the content-type
+	if contentType, ok := request.Headers["content-type"]; ok {
+		if contentType == "application/x-www-form-urlencoded" {
+			bodyValues, err := url.ParseQuery(request.Body)
+			if err != nil {
+				return &events.APIGatewayProxyResponse{
+					StatusCode: 400,
+					Body:       "Bad Request, error parsing the body of the request",
+				}, errors.New("Error parsing the body of the request")
+			}
+			fmt.Println(bodyValues)
+		}
+	}
+
 	// TODO Validate the token via tokens.indieauth.com
-	if token, ok := request.Headers["Authorization"]; ok {
+	if token, ok := request.Headers["authorization"]; ok {
 		fmt.Println("Authorization header exists: " + token)
 		if checkAuthorization(token) {
 			// process request
