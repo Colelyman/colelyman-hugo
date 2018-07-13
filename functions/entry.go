@@ -2,17 +2,13 @@ package main
 
 import (
 	"bytes"
-	"context"
 	"errors"
 	"fmt"
 	"net/url"
-	"os"
 	"strings"
 	"time"
 
-	"github.com/google/go-github/github"
 	hashids "github.com/speps/go-hashids"
-	"golang.org/x/oauth2"
 )
 
 type Entry struct {
@@ -20,14 +16,6 @@ type Entry struct {
 	tags    []string
 	slug    string
 }
-
-var ctx context.Context
-
-var sourceOwner = "Colelyman"
-var authorName = "Cole Lyman"
-var authorEmail = "cole@colelyman.com"
-var sourceRepo = "colelyman-hugo"
-var branch = "master"
 
 func CreateEntry(bodyValues url.Values) (string, error) {
 	if _, ok := bodyValues["content"]; ok {
@@ -40,22 +28,17 @@ func CreateEntry(bodyValues url.Values) (string, error) {
 			entry.tags = nil
 		}
 		if slug, ok := bodyValues["mp-slug"]; ok && len(slug) > 0 {
-			fmt.Printf("Slug value is %s\n", slug[0])
 			entry.slug = slug[0]
 		} else {
 			entry.slug = generateSlug()
 		}
+		fmt.Printf("Slug value is %s\n", entry.slug)
 
-		client := connectGitHub()
-		repo := getRepo(client)
+		// construct the post
 		path, file, _ := writePost(entry)
-		tree, err := getTree(path, file, client, repo)
+		err := CommitEntry(path, file)
 		if err != nil {
 			return "", err
-		}
-		err = pushCommit(client, repo, tree)
-		if err != nil {
-			fmt.Printf("Pushed the commit with err: %s\n", err)
 		}
 
 		return "/micro/" + entry.slug, err
@@ -71,68 +54,6 @@ func generateSlug() string {
 	id, _ := h.EncodeHex(time.Now().String())
 
 	return id
-}
-
-func connectGitHub() *github.Client {
-	ctx = context.Background()
-	ts := oauth2.StaticTokenSource(
-		&oauth2.Token{AccessToken: os.ExpandEnv("$GIT_API_TOKEN")},
-	)
-	tc := oauth2.NewClient(ctx, ts)
-
-	return github.NewClient(tc)
-}
-
-func getRepo(client *github.Client) *github.Reference {
-	repoURL := strings.Split(os.ExpandEnv("$REPOSITORY_URL"), "/")
-	fmt.Printf("repoURL %v\n", repoURL)
-	repo, _, err := client.Git.GetRef(ctx, sourceOwner, sourceRepo, "refs/heads/"+branch)
-	if err != nil {
-		panic(err)
-	}
-
-	return repo
-}
-
-// this function adds the new file to the repo
-func getTree(path string, file string, client *github.Client, repo *github.Reference) (*github.Tree, error) {
-	fmt.Printf("path: %s file: %s sourceOwner: %s sourceRepo: %s ctx: %s\n", path, file, sourceOwner, sourceRepo, ctx)
-	if repo == nil {
-		fmt.Println("repo is nil")
-	}
-	fmt.Printf("SHA: %+v\n", *repo.Object)
-	if client == nil {
-		fmt.Println("client is nil")
-	}
-	if repo == nil {
-		fmt.Println("repo is nil")
-	}
-	tree, _, err := client.Git.CreateTree(ctx, sourceOwner, sourceRepo, *repo.Object.SHA, []github.TreeEntry{github.TreeEntry{Path: github.String(path), Type: github.String("blob"), Content: github.String(file), Mode: github.String(("100644"))}})
-	fmt.Printf("getTree err: %s\n", err)
-
-	return tree, err
-}
-
-func pushCommit(client *github.Client, repo *github.Reference, tree *github.Tree) error {
-	parent, _, err := client.Repositories.GetCommit(ctx, sourceOwner, sourceRepo, *repo.Object.SHA)
-	if err != nil {
-		return err
-	}
-
-	parent.Commit.SHA = parent.SHA
-
-	date := time.Now()
-	author := &github.CommitAuthor{Date: &date, Name: &authorName, Email: &authorEmail}
-	message := "Added new micropub entry."
-	commit := &github.Commit{Author: author, Message: &message, Tree: tree, Parents: []github.Commit{*parent.Commit}}
-	newCommit, _, err := client.Git.CreateCommit(ctx, sourceOwner, sourceRepo, commit)
-	if err != nil {
-		return err
-	}
-
-	repo.Object.SHA = newCommit.SHA
-	_, _, err = client.Git.UpdateRef(ctx, sourceOwner, sourceRepo, repo, false)
-	return err
 }
 
 func writePost(entry *Entry) (string, string, error) {
