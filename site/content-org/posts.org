@@ -101,6 +101,22 @@ If you are interested in the details of our algorithm and would like to see some
 results, please check out our paper [[https://ieeexplore.ieee.org/document/8251300/][Whole Genome Phylogenetic Tree
 Reconstruction Using Colored de Bruijn Graphs]] ([[https://arxiv.org/abs/1709.00164][preprint]]). We are currently
 working on extending =kleuren= to improve its efficiency.
+** TODO Hugo + Micropub = Bliss
+:PROPERTIES:
+  :EXPORT_FILE_NAME: hugo-micropub-bliss
+:END:
+This post is about how I managed to set up a micropub endpoint to publish to my
+Hugo static site hosted on Netlify. Now that I have completed it, I can say that
+it was quite the journey.
+
+Here are some of the invaluable resources that I used along the way:
+  - https://rhiaro.co.uk/2015/04/minimum-viable-micropub
+  - https://quill.p3k.io/creating-a-micropub-endpoint
+  - https://tokens.indieauth.com/token
+  - https://www.netlify.com/docs/functions/
+  - https://www.w3.org/TR/micropub/
+  - https://github.com/google/go-github
+  - https://github.com/google/go-github/blob/master/example/commitpr/main.go
 * Footnotes
 * COMMENT Local Variables                          :ARCHIVE:
 # Local Variables:
