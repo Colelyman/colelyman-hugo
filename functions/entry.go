@@ -34,7 +34,7 @@ func CreateEntry(bodyValues url.Values) (string, error) {
 		} else {
 			entry.slug = entry.hash
 		}
-		fmt.Printf("Slug value is %s\n", entry.slug)
+		fmt.Printf("Slug value is %+v\n", entry.slug)
 
 		// construct the post
 		path, file, _ := writePost(entry)
@@ -83,6 +83,9 @@ func writePost(entry *Entry) (string, string, error) {
 	buff.WriteString(entry.Content + "\n")
 
 	path := strings.Replace(entry.slug, " ", "-", -1) + ".md"
+	if path == "" {
+		path = entry.hash
+	}
 
 	return "site/content/micro/" + path, buff.String(), nil
 }
