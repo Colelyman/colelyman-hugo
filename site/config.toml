@@ -35,7 +35,3 @@ DateForm = "Jan 2 2006"
   Endpoint = "https://webmention.io/"
   Account = "colelyman.com"
 
-# RSS, categories and tags disabled for an easy start
-# See configuration options for more details: 
-# https://gohugo.io/getting-started/configuration/#toml-configuration
-disableKinds = ["RSS", "taxonomy", "taxonomyTerm"]
