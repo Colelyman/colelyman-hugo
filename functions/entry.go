@@ -94,14 +94,23 @@ func getRepo(client *github.Client) *github.Reference {
 
 	var baseRef *github.Reference
 	baseRef, _, err = client.Git.GetRef(ctx, sourceOwner, sourceRepo, "refs/heads/"+branch)
+	if err != nil {
+		panic(err)
+	}
 	newRef := &github.Reference{Ref: github.String("refs/heads/" + branch), Object: &github.GitObject{SHA: baseRef.Object.SHA}}
 	repo, _, err = client.Git.CreateRef(ctx, sourceOwner, sourceRepo, newRef)
+	if err != nil {
+		panic(err)
+	}
 	return repo
 }
 
 // this function adds the new file to the repo
 func getTree(path string, file string, client *github.Client, repo *github.Reference) (*github.Tree, error) {
 	fmt.Printf("path: %s file: %s sourceOwner: %s sourceRepo: %s ctx: %s\n", path, file, sourceOwner, sourceRepo, ctx)
+	if repo == nil {
+		fmt.Println("repo is nil")
+	}
 	fmt.Printf("SHA: %+v\n", *repo.Object)
 	if client == nil {
 		fmt.Println("client is nil")
