@@ -2,9 +2,7 @@ package main
 
 import (
 	"context"
-	"fmt"
 	"os"
-	"strings"
 	"time"
 
 	"github.com/google/go-github/github"
@@ -44,8 +42,7 @@ func connectGitHub() *github.Client {
 }
 
 func getRef(client *github.Client) *github.Reference {
-	refURL := strings.Split(os.ExpandEnv("$REPOSITORY_URL"), "/")
-	fmt.Printf("refURL %v\n", refURL)
+	// refURL := strings.Split(os.ExpandEnv("$REPOSITORY_URL"), "/")
 	ref, _, err := client.Git.GetRef(ctx, sourceOwner, sourceRepo, "refs/heads/"+branch)
 	if err != nil {
 		panic(err)
@@ -56,19 +53,7 @@ func getRef(client *github.Client) *github.Reference {
 
 // this function adds the new file to the repo
 func getTree(path string, file string, client *github.Client, ref *github.Reference) (*github.Tree, error) {
-	fmt.Printf("path: %s file: %s sourceOwner: %s sourceRef: %s ctx: %s\n", path, file, sourceOwner, sourceRepo, ctx)
-	if ref == nil {
-		fmt.Println("ref is nil")
-	}
-	fmt.Printf("SHA: %+v\n", *ref.Object)
-	if client == nil {
-		fmt.Println("client is nil")
-	}
-	if ref == nil {
-		fmt.Println("ref is nil")
-	}
 	tree, _, err := client.Git.CreateTree(ctx, sourceOwner, sourceRepo, *ref.Object.SHA, []github.TreeEntry{github.TreeEntry{Path: github.String(path), Type: github.String("blob"), Content: github.String(file), Mode: github.String(("100644"))}})
-	fmt.Printf("getTree err: %s\n", err)
 
 	return tree, err
 }
