@@ -46,13 +46,19 @@ func CreateEntry(bodyValues url.Values) (string, error) {
 		}
 
 		client := connectGitHub()
+		fmt.Println("Connected to Github")
 		repo := getRepo(client)
+		fmt.Println("Retrieved the repo")
 		path, file, _ := writePost(entry)
+		fmt.Println("Wrote the post")
 		tree, err := getTree(path, file, client, repo)
+		fmt.Printf("Got the tree, with tree: %v err: %s\n", tree, err)
 		if err != nil {
 			return "", err
 		}
 		err = pushCommit(client, repo, tree)
+		fmt.Printf("Pushed the commit with err: %s\n", err)
+
 		return "/", err
 	}
 	return "",
@@ -82,7 +88,6 @@ func getRepo(client *github.Client) *github.Reference {
 	fmt.Printf("$REPOSITORY_URL: %s, $BRANCH: %s\n", os.Getenv("REPOSITORY_URL"), os.Getenv("BRANCH"))
 	repoURL := strings.Split(os.ExpandEnv("$REPOSITORY_URL"), "/")
 	fmt.Printf("repoURL %v\n", repoURL)
-	// owner, repoName := repoURL[len(repoURL)-2], repoURL[len(repoURL)-1]
 	repo, _, err := client.Git.GetRef(ctx, sourceOwner, sourceRepo, "heads/"+branch)
 	if err != nil {
 		panic(err)
