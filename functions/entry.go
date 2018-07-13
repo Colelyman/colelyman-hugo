@@ -139,7 +139,8 @@ func pushCommit(client *github.Client, repo *github.Reference, tree *github.Tree
 func writePost(entry *Entry) (string, string, error) {
 	var buff bytes.Buffer
 
-	t := time.Now().Format(time.RFC822)
+	location, _ := time.LoadLocation("MST")
+	t := time.Now().In(location).Format(time.RFC822)
 	// write the front matter in toml format
 	buff.WriteString("+++\n")
 	buff.WriteString("title = \"#\"\n")
