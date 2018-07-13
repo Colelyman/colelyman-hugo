@@ -52,7 +52,14 @@ func generateHash() string {
 	hd := hashids.NewData()
 	hd.Salt = "do you want to know a secret?"
 	h, _ := hashids.NewWithData(hd)
-	id, _ := h.EncodeHex(time.Now().String())
+	t := []int{time.Now().Year(),
+		int(time.Now().Month()),
+		time.Now().Day(),
+		time.Now().Hour(),
+		time.Now().Minute(),
+		time.Now().Second(),
+	}
+	id, _ := h.Encode(t)
 
 	return id
 }
