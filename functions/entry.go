@@ -51,7 +51,7 @@ func getRepo(client *github.Client) *github.Reference {
 	repoURL := strings.Split(os.ExpandEnv("$REPOSITORY_URL"), "/")
 	fmt.Printf("repoURL %v\n", repoURL)
 	// owner, repoName := repoURL[len(repoURL)-2], repoURL[len(repoURL)-1]
-	repo, _, err := client.Git.GetRef(ctx, "Colelyman", "colelyman-hugo", "origin/master")
+	repo, _, err := client.Git.GetRef(ctx, "Colelyman", "colelyman-hugo", "heads/master")
 	if err != nil {
 		panic(err)
 	}
