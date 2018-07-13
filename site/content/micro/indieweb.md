@@ -1,5 +1,5 @@
 +++
-title = "#"
+title = ""
 date = "13 Jul 18 09:03 MST"
 categories = ["Micro"]
 tags = []
