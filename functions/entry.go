@@ -15,6 +15,7 @@ type Entry struct {
 	Content string
 	tags    []string
 	slug    string
+	hash    string
 }
 
 func CreateEntry(bodyValues url.Values) (string, error) {
@@ -22,15 +23,16 @@ func CreateEntry(bodyValues url.Values) (string, error) {
 		fmt.Println(bodyValues)
 		entry := new(Entry)
 		entry.Content = bodyValues["content"][0]
+		entry.hash = generateHash()
 		if tags, ok := bodyValues["category"]; ok {
 			entry.tags = tags
 		} else {
 			entry.tags = nil
 		}
-		if slug, ok := bodyValues["mp-slug"]; ok && len(slug) > 0 {
+		if slug, ok := bodyValues["mp-slug"]; ok && len(slug) > 0 && slug[0] != "" {
 			entry.slug = slug[0]
 		} else {
-			entry.slug = generateSlug()
+			entry.slug = entry.hash
 		}
 		fmt.Printf("Slug value is %s\n", entry.slug)
 
@@ -47,7 +49,7 @@ func CreateEntry(bodyValues url.Values) (string, error) {
 		errors.New("Content in response body is missing")
 }
 
-func generateSlug() string {
+func generateHash() string {
 	hd := hashids.NewData()
 	hd.Salt = "do you want to know a secret?"
 	h, _ := hashids.NewWithData(hd)
