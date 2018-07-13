@@ -92,16 +92,6 @@ func getRepo(client *github.Client) *github.Reference {
 		panic(err)
 	}
 
-	// var baseRef *github.Reference
-	// baseRef, _, err = client.Git.GetRef(ctx, sourceOwner, sourceRepo, "refs/heads/"+branch)
-	// if err != nil {
-	// 	panic(err)
-	// }
-	// newRef := &github.Reference{Ref: github.String("refs/heads/" + branch), Object: &github.GitObject{SHA: baseRef.Object.SHA}}
-	// repo, _, err = client.Git.CreateRef(ctx, sourceOwner, sourceRepo, newRef)
-	// if err != nil {
-	// 	panic(err)
-	// }
 	return repo
 }
 
@@ -149,10 +139,14 @@ func pushCommit(client *github.Client, repo *github.Reference, tree *github.Tree
 func writePost(entry *Entry) (string, string, error) {
 	var buff bytes.Buffer
 
+	t, err := time.Parse("Mon Jan 2 15:04:05 MST 2006", time.Now().String())
+	if err != nil {
+		panic(err)
+	}
 	// write the front matter in toml format
 	buff.WriteString("+++\n")
 	buff.WriteString("title = \"" + entry.slug + "\"\n") // TODO come up with a title
-	buff.WriteString("date = \"" + time.Now().String() + "\"\n")
+	buff.WriteString("date = \"" + t.String() + "\"\n")
 	buff.WriteString("categories = [\"Micro\"]\n")
 	buff.WriteString("tags = [")
 	for i, tag := range entry.tags {
@@ -162,7 +156,7 @@ func writePost(entry *Entry) (string, string, error) {
 		}
 	}
 	buff.WriteString("]\n")
-	buff.WriteString("slug = " + entry.slug)
+	buff.WriteString("slug = \"" + entry.slug + "\"\n")
 	buff.WriteString("+++\n")
 
 	// write the content
