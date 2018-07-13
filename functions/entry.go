@@ -39,7 +39,7 @@ func CreateEntry(bodyValues url.Values) (string, error) {
 		} else {
 			entry.tags = nil
 		}
-		if slug, ok := bodyValues["mp-slug"]; ok {
+		if slug, ok := bodyValues["mp-slug"]; ok && slug[0] != "" {
 			entry.slug = slug[0]
 		} else {
 			entry.slug = generateSlug()

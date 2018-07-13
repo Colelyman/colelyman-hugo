@@ -116,7 +116,7 @@ func checkAuthorization(bodyValues url.Values, req events.APIGatewayProxyRequest
 
 func CheckContentType(req events.APIGatewayProxyRequest) (*events.APIGatewayProxyResponse, error) {
 	if contentType, ok := req.Headers["content-type"]; ok {
-		if contentType == "application/x-www-form-urlencoded" {
+		if contentType == "application/x-www-form-urlencoded" || contentType == "application/x-www-form-urlencoded;charset=UTF-8" {
 			bodyValues, err := url.ParseQuery(req.Body)
 			if err != nil {
 				return &events.APIGatewayProxyResponse{
