@@ -5,7 +5,6 @@ import (
 	"errors"
 	"fmt"
 	"net/url"
-	"strings"
 	"time"
 
 	hashids "github.com/speps/go-hashids"
@@ -65,7 +64,7 @@ func writePost(entry *Entry) (string, string, error) {
 	t := time.Now().In(location).Format(time.RFC822)
 	// write the front matter in toml format
 	buff.WriteString("+++\n")
-	buff.WriteString("title = \"#\"\n")
+	buff.WriteString("title = \"\"\n")
 	buff.WriteString("date = \"" + t + "\"\n")
 	buff.WriteString("categories = [\"Micro\"]\n")
 	buff.WriteString("tags = [")
@@ -82,10 +81,10 @@ func writePost(entry *Entry) (string, string, error) {
 	// write the content
 	buff.WriteString(entry.Content + "\n")
 
-	path := strings.Replace(entry.slug, " ", "-", -1) + ".md"
-	if path == "" {
-		path = entry.hash
-	}
+	fmt.Printf("Length of slug is %d, with value %s.\n", len(entry.slug), entry.slug)
+	// path := strings.Replace(entry.slug, " ", "-", -1) + ".md"
+	path := entry.hash + ".md"
+	fmt.Printf("path is %+v\n", path)
 
 	return "site/content/micro/" + path, buff.String(), nil
 }
