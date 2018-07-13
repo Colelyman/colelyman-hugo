@@ -103,7 +103,7 @@ func checkAuthorization(bodyValues url.Values, req events.APIGatewayProxyRequest
 		}
 		// Everything worked out!! Send the location and an OK status
 		return &events.APIGatewayProxyResponse{
-			StatusCode: 201,
+			StatusCode: 202,
 			Headers:    map[string]string{"Location": location},
 		}, nil
 	} else {

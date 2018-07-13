@@ -39,27 +39,26 @@ func CreateEntry(bodyValues url.Values) (string, error) {
 		} else {
 			entry.tags = nil
 		}
-		if slug, ok := bodyValues["mp-slug"]; ok && slug[0] != "" {
+		if slug, ok := bodyValues["mp-slug"]; ok && len(slug) > 0 {
+			fmt.Printf("Slug value is %s\n", slug[0])
 			entry.slug = slug[0]
 		} else {
 			entry.slug = generateSlug()
 		}
 
 		client := connectGitHub()
-		fmt.Println("Connected to Github")
 		repo := getRepo(client)
-		fmt.Println("Retrieved the repo")
 		path, file, _ := writePost(entry)
-		fmt.Println("Wrote the post")
 		tree, err := getTree(path, file, client, repo)
-		fmt.Printf("Got the tree, with tree: %v err: %s\n", tree, err)
 		if err != nil {
 			return "", err
 		}
 		err = pushCommit(client, repo, tree)
-		fmt.Printf("Pushed the commit with err: %s\n", err)
+		if err != nil {
+			fmt.Printf("Pushed the commit with err: %s\n", err)
+		}
 
-		return "/", err
+		return "/micro/" + entry.slug, err
 	}
 	return "",
 		errors.New("Content in response body is missing")
