@@ -92,16 +92,16 @@ func getRepo(client *github.Client) *github.Reference {
 		panic(err)
 	}
 
-	var baseRef *github.Reference
-	baseRef, _, err = client.Git.GetRef(ctx, sourceOwner, sourceRepo, "refs/heads/"+branch)
-	if err != nil {
-		panic(err)
-	}
-	newRef := &github.Reference{Ref: github.String("refs/heads/" + branch), Object: &github.GitObject{SHA: baseRef.Object.SHA}}
-	repo, _, err = client.Git.CreateRef(ctx, sourceOwner, sourceRepo, newRef)
-	if err != nil {
-		panic(err)
-	}
+	// var baseRef *github.Reference
+	// baseRef, _, err = client.Git.GetRef(ctx, sourceOwner, sourceRepo, "refs/heads/"+branch)
+	// if err != nil {
+	// 	panic(err)
+	// }
+	// newRef := &github.Reference{Ref: github.String("refs/heads/" + branch), Object: &github.GitObject{SHA: baseRef.Object.SHA}}
+	// repo, _, err = client.Git.CreateRef(ctx, sourceOwner, sourceRepo, newRef)
+	// if err != nil {
+	// 	panic(err)
+	// }
 	return repo
 }
 
