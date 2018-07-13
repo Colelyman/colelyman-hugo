@@ -101,7 +101,16 @@ func getRepo(client *github.Client) *github.Reference {
 
 // this function adds the new file to the repo
 func getTree(path string, file string, client *github.Client, repo *github.Reference) (*github.Tree, error) {
+	fmt.Printf("path: %s file: %s sourceOwner: %s sourceRepo: %s ctx: %s\n", path, file, sourceOwner, sourceRepo, ctx)
+	fmt.Printf("SHA: %s\n", *repo.Object.SHA)
+	if client == nil {
+		fmt.Println("client is nil")
+	}
+	if repo == nil {
+		fmt.Println("repo is nil")
+	}
 	tree, _, err := client.Git.CreateTree(ctx, sourceOwner, sourceRepo, *repo.Object.SHA, []github.TreeEntry{github.TreeEntry{Path: github.String(path), Type: github.String("blob"), Content: github.String(file), Mode: github.String(("100644"))}})
+	fmt.Printf("getTree err: %s\n", err)
 
 	return tree, err
 }
