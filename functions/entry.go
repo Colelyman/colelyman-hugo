@@ -102,7 +102,7 @@ func getRepo(client *github.Client) *github.Reference {
 // this function adds the new file to the repo
 func getTree(path string, file string, client *github.Client, repo *github.Reference) (*github.Tree, error) {
 	fmt.Printf("path: %s file: %s sourceOwner: %s sourceRepo: %s ctx: %s\n", path, file, sourceOwner, sourceRepo, ctx)
-	fmt.Printf("SHA: %s\n", *repo.Object.SHA)
+	fmt.Printf("SHA: %+v\n", *repo.Object)
 	if client == nil {
 		fmt.Println("client is nil")
 	}
@@ -144,7 +144,7 @@ func writePost(entry *Entry) (string, string, error) {
 	buff.WriteString("+++\n")
 	buff.WriteString("title = \"" + entry.slug + "\"\n") // TODO come up with a title
 	buff.WriteString("date = \"" + time.Now().String() + "\"\n")
-	buff.WriteString("categories = [\"Micro\"]")
+	buff.WriteString("categories = [\"Micro\"]\n")
 	buff.WriteString("tags = [")
 	for i, tag := range entry.tags {
 		buff.WriteString("\"" + tag + "\"")
@@ -157,7 +157,7 @@ func writePost(entry *Entry) (string, string, error) {
 	buff.WriteString("+++\n")
 
 	// write the content
-	buff.WriteString(entry.Content)
+	buff.WriteString(entry.Content + "\n")
 
 	path := strings.Replace(entry.slug, " ", "-", -1) + ".md"
 
