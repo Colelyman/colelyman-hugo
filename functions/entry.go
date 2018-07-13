@@ -101,9 +101,7 @@ func getRepo(client *github.Client) *github.Reference {
 
 // this function adds the new file to the repo
 func getTree(path string, file string, client *github.Client, repo *github.Reference) (*github.Tree, error) {
-	entries := make([]github.TreeEntry, 1)
-	entries = append(entries, github.TreeEntry{Path: github.String(path), Type: github.String("blob"), Content: github.String(file), Mode: github.String(("100644"))})
-	tree, _, err := client.Git.CreateTree(ctx, sourceOwner, sourceRepo, *repo.Object.SHA, entries)
+	tree, _, err := client.Git.CreateTree(ctx, sourceOwner, sourceRepo, *repo.Object.SHA, []github.TreeEntry{github.TreeEntry{Path: github.String(path), Type: github.String("blob"), Content: github.String(file), Mode: github.String(("100644"))}})
 
 	return tree, err
 }
