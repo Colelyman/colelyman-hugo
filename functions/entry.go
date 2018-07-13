@@ -47,11 +47,12 @@ func connectGitHub() *github.Client {
 }
 
 func getRepo(client *github.Client) *github.Reference {
+	fmt.Printf("$REPOSITORY_URL: %s", os.ExpandEnv("$REPOSITORY_URL"))
 	repoURL := strings.Split(os.ExpandEnv("$REPOSITORY_URL"), "/")
-	fmt.Printf("reopURL %v", repoURL)
-	owner, repoName := repoURL[len(repoURL)-2], repoURL[len(repoURL)-1]
-	fmt.Printf("Owner: %s and repoName: %s and branch: %s\n", owner, repoName, os.ExpandEnv("$BRANCH"))
-	repo, _, err := client.Git.GetRef(ctx, owner, repoName, "origin/"+os.ExpandEnv("$BRANCH"))
+	fmt.Printf("repoURL %v\n", repoURL)
+	// owner, repoName := repoURL[len(repoURL)-2], repoURL[len(repoURL)-1]
+	// fmt.Printf("Owner: %s and repoName: %s and branch: %s\n", owner, repoName, os.ExpandEnv("$BRANCH"))
+	repo, _, err := client.Git.GetRef(ctx, "Colelyman", "colelyman-hugo", "origin/"+os.ExpandEnv("$BRANCH"))
 	if err != nil {
 		panic(err)
 	}
