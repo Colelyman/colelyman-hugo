@@ -29,11 +29,11 @@ func CreateEntry(bodyValues url.Values) (string, error) {
 			entry.tags = nil
 		}
 		if slug, ok := bodyValues["mp-slug"]; ok && len(slug) > 0 && slug[0] != "" {
-			entry.slug = slug[0]
+			entry.slug = slug[0] + "-" + entry.hash
 		} else {
 			entry.slug = entry.hash
 		}
-		fmt.Printf("Slug value is %+v\n", entry.slug)
+		fmt.Printf("Hash value is %+v\n", entry.hash)
 
 		// construct the post
 		path, file, _ := writePost(entry)
@@ -83,7 +83,7 @@ func writePost(entry *Entry) (string, string, error) {
 
 	fmt.Printf("Length of slug is %d, with value %s.\n", len(entry.slug), entry.slug)
 	// path := strings.Replace(entry.slug, " ", "-", -1) + ".md"
-	path := entry.hash + ".md"
+	path := entry.slug + ".md"
 	fmt.Printf("path is %+v\n", path)
 
 	return "site/content/micro/" + path, buff.String(), nil
