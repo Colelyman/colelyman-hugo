@@ -139,14 +139,11 @@ func pushCommit(client *github.Client, repo *github.Reference, tree *github.Tree
 func writePost(entry *Entry) (string, string, error) {
 	var buff bytes.Buffer
 
-	t, err := time.Parse("Mon Jan 2 15:04:05 MST 2006", time.Now().String())
-	if err != nil {
-		panic(err)
-	}
+	t := time.Now().Format(time.RFC822)
 	// write the front matter in toml format
 	buff.WriteString("+++\n")
-	buff.WriteString("title = \"" + entry.slug + "\"\n") // TODO come up with a title
-	buff.WriteString("date = \"" + t.String() + "\"\n")
+	buff.WriteString("title = \"#\"\n")
+	buff.WriteString("date = \"" + t + "\"\n")
 	buff.WriteString("categories = [\"Micro\"]\n")
 	buff.WriteString("tags = [")
 	for i, tag := range entry.tags {
