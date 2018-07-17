@@ -5,4 +5,4 @@ categories = ["Micro"]
 tags = []
 slug = "9wwAiwspCrfmHm"
 +++
-👍
+👍 https://www.quantamagazine.org/a-short-guide-to-hard-problems-20180716/
