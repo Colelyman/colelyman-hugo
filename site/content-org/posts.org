@@ -103,6 +103,9 @@ Reconstruction Using Colored de Bruijn Graphs]] ([[https://arxiv.org/abs/1709.00
 working on extending =kleuren= to improve its efficiency.
 ** DONE Intelligence to Arrogance Ratio
 CLOSED: [2018-08-18 Sat 11:57]
+:PROPERTIES:
+  :EXPORT_FILE_NAME: intelligence-to-arrogance-ratio
+:END:
 Yesterday I graduated with my Bachelor's degree from [[https://byu.edu][Brigham Young University]]
 and attended the Convocation services for my college (College of Physical and
 Mathematical Sciences). Our dean, [[https://madison.byu.edu/][Dr. Shane Reese]], gave a very inspirational
@@ -120,12 +123,10 @@ The second piece of advice is what I would like to primarily focus on, and that
 advice was to be meek. As a tool to measure one's meekness, he shared a
 conversation that he had overheard where a faculty member was discussing the
 president of our university, [[https://president.byu.edu/bio][Dr. Kevin J. Worthen]]. This faculty member described
-Dr. Worthen has having an incredibly high intelligence to arrogance ratio,
+Dr. Worthen as having an incredibly high intelligence to arrogance ratio,
 illustrated below.
 
-#+BEGIN_EXPORT latex
 $\frac{intelligence}{arrogance}$
-#+END_EXPORT
 
 Imagine that one's intelligence and arrogance can be quantified, then the
 intelligence to arrogance ratio would be your quantified intelligence divided by
