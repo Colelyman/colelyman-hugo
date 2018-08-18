@@ -101,6 +101,48 @@ If you are interested in the details of our algorithm and would like to see some
 results, please check out our paper [[https://ieeexplore.ieee.org/document/8251300/][Whole Genome Phylogenetic Tree
 Reconstruction Using Colored de Bruijn Graphs]] ([[https://arxiv.org/abs/1709.00164][preprint]]). We are currently
 working on extending =kleuren= to improve its efficiency.
+** DONE Intelligence to Arrogance Ratio
+CLOSED: [2018-08-18 Sat 11:57]
+Yesterday I graduated with my Bachelor's degree from [[https://byu.edu][Brigham Young University]]
+and attended the Convocation services for my college (College of Physical and
+Mathematical Sciences). Our dean, [[https://madison.byu.edu/][Dr. Shane Reese]], gave a very inspirational
+talk, of which I would like to share part of it with you.
+
+Dr. Reese's talk centered on two pieces of advice to the graduates, working hard
+and being meek. He also provided tools of measurement in order for us to see how
+well we are following his advice.
+
+His first piece of advice was to work really hard. He shared that there is no
+substitute to working hard, and that one can measure each day if one has given
+an honest day's work.
+
+The second piece of advice is what I would like to primarily focus on, and that
+advice was to be meek. As a tool to measure one's meekness, he shared a
+conversation that he had overheard where a faculty member was discussing the
+president of our university, [[https://president.byu.edu/bio][Dr. Kevin J. Worthen]]. This faculty member described
+Dr. Worthen has having an incredibly high intelligence to arrogance ratio,
+illustrated below.
+
+#+BEGIN_EXPORT latex
+$\frac{intelligence}{arrogance}$
+#+END_EXPORT
+
+Imagine that one's intelligence and arrogance can be quantified, then the
+intelligence to arrogance ratio would be your quantified intelligence divided by
+your quantified arrogance. For example, if one is incredibly dumb but also quite
+full of themselves, then the ratio would be extremely low. On the other hand, if
+one is reasonably intelligent while still humble, then the ratio is quite high.
+As a third example, if one is intelligent, but also pompous, then the ratio will
+be around 1.
+
+In my experience, the individuals with a low ratio are the most pleasant to be
+around, because they offer interesting insights and advice while not being
+condescending. They are the ones that show you (rather than tell you) how
+intelligent they are.
+
+I found this advice to be incredibly insightful and useful to all. I hope to
+increase my own intelligence to arrogance ratio as I pursue higher education and
+gain more life experience.
 ** TODO Hugo + Micropub = Bliss
 :PROPERTIES:
   :EXPORT_FILE_NAME: hugo-micropub-bliss
@@ -117,6 +159,11 @@ Here are some of the invaluable resources that I used along the way:
   - https://www.w3.org/TR/micropub/
   - https://github.com/google/go-github
   - https://github.com/google/go-github/blob/master/example/commitpr/main.go
+** TODO Multi-Editing Like a Boss (with Emacs)
+:PROPERTIES:
+  :EXPORT_FILE_NAME: multi-editing-like-a-boss--with-emacs
+:END:
+Reference the following post https://sam217pa.github.io/2016/09/11/nuclear-power-editing-via-ivy-and-ag/
 * Footnotes
 * COMMENT Local Variables                          :ARCHIVE:
 # Local Variables:
