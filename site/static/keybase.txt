@@ -1,0 +1,56 @@
+==================================================================
+https://keybase.io/colelyman
+--------------------------------------------------------------------
+
+I hereby claim:
+
+  * I am an admin of https://colelyman.com
+  * I am colelyman (https://keybase.io/colelyman) on keybase.
+  * I have a public key ASDSxAqaZq-uEWXfjlA7FumgaGXm47CeKWxqphX0ITlVMQo
+
+To do so, I am signing this object:
+
+{
+  "body": {
+    "key": {
+      "eldest_kid": "0120d2c40a9a66afae1165df8e503b16e9a06865e6e3b09e296c6aa615f4213955310a",
+      "host": "keybase.io",
+      "kid": "0120d2c40a9a66afae1165df8e503b16e9a06865e6e3b09e296c6aa615f4213955310a",
+      "uid": "c30de87805eef4ac8a2f7471e217da19",
+      "username": "colelyman"
+    },
+    "merkle_root": {
+      "ctime": 1535068047,
+      "hash": "94c92f72da990992b07a481d8591f61ebb5e353aa63e785724066ce208d8901bb0e43a84507123ba9606da724dcb2a326f75caba181acc599c0a2e973856c45c",
+      "hash_meta": "0e3f6c7945a146311a7d45d252a4b9e1a037c4441bb187ecb3040c69fae8eb85",
+      "seqno": 3508070
+    },
+    "service": {
+      "entropy": "2wPWY7C6TFYA+H/kGgp3wob0",
+      "hostname": "colelyman.com",
+      "protocol": "https:"
+    },
+    "type": "web_service_binding",
+    "version": 2
+  },
+  "client": {
+    "name": "keybase.io go client",
+    "version": "2.5.0"
+  },
+  "ctime": 1535068085,
+  "expire_in": 504576000,
+  "prev": "084708979eed72ea86f4f7fc22601345f5c5ddbb8db9b01f14adb6bc40bcac23",
+  "seqno": 7,
+  "tag": "signature"
+}
+
+which yields the signature:
+
+hKRib2R5hqhkZXRhY2hlZMOpaGFzaF90eXBlCqNrZXnEIwEg0sQKmmavrhFl345QOxbpoGhl5uOwnilsaqYV9CE5VTEKp3BheWxvYWTESpcCB8QgCEcIl57tcuqG9Pf8ImATRfXF3buNubAfFK22vEC8rCPEIDmQHlo+PwPjFa80xVbW9AnPEYGPp8fnu9WaSR0rO+HyAgHCo3NpZ8RAiMon84YGLfQcMV6fXnL8A7yrjzopu2D9a7IFtqGotqs3TBe3ZzcalX0hZHCW2RZOquRpRJYBsmhFg4FfdFttC6hzaWdfdHlwZSCkaGFzaIKkdHlwZQildmFsdWXEIMcvvPPwcxiLT4SxpYqWZDNfKbPt459RIxIva89aCMxYo3RhZ80CAqd2ZXJzaW9uAQ==
+
+And finally, I am proving ownership of this host by posting or
+appending to this document.
+
+View my publicly-auditable identity here: https://keybase.io/colelyman
+
+==================================================================
