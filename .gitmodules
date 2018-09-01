@@ -4,3 +4,6 @@
 [submodule "site/themes/indieweb-lanyon-hugo"]
 	path = site/themes/indieweb-lanyon-hugo
 	url = git@github.com:Colelyman/colelyman-hugo-theme.git
+[submodule "functions"]
+	path = functions
+	url = https://github.com/Colelyman/gozette.git
