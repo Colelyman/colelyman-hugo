@@ -44,7 +44,7 @@ methods.
 We want to use the CdBG to reconstruct phylogenetic trees because it is very
 efficient computationally. The CdBG can be constructed in \(O(n)\) time and space
 and it can utilize whole genome sequences, which is a shortcoming of many of the
-traditional phylogenetic tree reconstruction algorithms. 
+traditional phylogenetic tree reconstruction algorithms.
 
 Furthermore, we also figured that the CdBG contains more information than many
 of the kmer counting methods, and if they can perform so well then the CdBG will
@@ -56,7 +56,7 @@ where \(k - 1\) basepairs overlap on either end of the kmer).
 In order to prove our hypothesis, we did what every self-respecting Computer
 Scientist would do, we wrote a program to figure out if it worked. We call our
 program [[https://github.com/Colelyman/kleuren][=kleuren=]], which is Dutch for "colors" (referring to the colors in the
-CdBG). 
+CdBG).
 
 =kleuren= works by finding /bubble/ regions of the CdBG. A bubble is defined as
 a subgraph of the CdBG that consists of a start and end node that are present in
@@ -69,7 +69,7 @@ After the bubbles are found, they are aligned through Multiple Sequence
 Alignment (MSA) via [[https://mafft.cbrc.jp/alignment/software/][MAFFT]] and then each MSA block is concatenated to form a
 supermatrix. The supermatrix is then fed into a Maximum-Likelihood program
 ([[http://www.iqtree.org/][IQ-TREE]]) to reconstruct the phylogenetic tree of the taxa.
-**** How Bubbles are Found 
+**** How Bubbles are Found
 =kleuren= uses fairly simple and straightforward algorithms to find
 the bubbles, which is broken up into two steps: Finding the End Node
 and Extending the Paths.
@@ -96,7 +96,7 @@ is =ACT -> CTG=, then the collapsed sequence will turn out to be
 This is implemented as at most $c$ depth-first searches, where $c$ is
 the number of colors. The number of depth-first searches decreases as
 the number of paths with shared colors increases.
-*** Further Reading 
+*** Further Reading
 If you are interested in the details of our algorithm and would like to see some
 results, please check out our paper [[https://ieeexplore.ieee.org/document/8251300/][Whole Genome Phylogenetic Tree
 Reconstruction Using Colored de Bruijn Graphs]] ([[https://arxiv.org/abs/1709.00164][preprint]]). We are currently
@@ -170,7 +170,7 @@ CLOSED: [2018-09-05 Wed 22:54]
 :PROPERTIES:
   :EXPORT_FILE_NAME: euler-s-method-in-haskell
 :END:
-*** Introduction 
+*** Introduction
 In my predictive modelling class, we were given a homework assignment to apply
 the [[https://en.wikipedia.org/wiki/Euler_method][Euler method]] for a simple equation and then write a program to
 compute the method. I will show what I did to apply the Euler method, and then
@@ -283,15 +283,15 @@ the multi-line version.
 #+BEGIN_SRC python :exports code
 def hamming(a, b):
     zipped_strings = zip(a, b)
-    
+
     mismatched_chars = []
-    
+
     # equivalent of the [...]
     for i in zipped_strings:
         # equivalent of the filter(lambda x: x[0] != x[1], ...)
         if i[0] != i[1]:
             mismatched_chars.append(i)
-    
+
     return len(mismatched_chars)
 #+END_SRC
 **** Zip
@@ -299,7 +299,7 @@ def hamming(a, b):
 and returns a list where each element is a tuple, and the first element in the
 tuple comes from the first list and the second element in the tuple comes from
 the second list. For example:
-#+BEGIN_SRC python :exports both :results output 
+#+BEGIN_SRC python :exports both :results output
 a = [1, 2, 3]
 b = ['a', 'b', 'c']
 
@@ -333,9 +333,9 @@ Lambda functions may look scary (mostly because it can be hard to recognize
 where the parameters come from), but just think of them as functions that don't
 have a name. Lambda functions are usually short functions that
 perform something straight-forward. In the case of the one-liner, the lambda
-function 
+function
 #+BEGIN_SRC python :exports code
-lambda x: x[0] != x[1] 
+lambda x: x[0] != x[1]
 #+END_SRC
 takes one argument =x= (which is of type tuple) and checks if the two elements
 of the tuple (=x[0]= and =x[1=) are equal, thereby returning a boolean value.
@@ -358,6 +358,54 @@ list of tuples from two elements of a list. Our =filter= expression returns a
 list where the condition =x[0] != x[1]= is =True=, thus giving us a list of
 characters that don't match up with one another. When we take the length of this
 list we get, by definition, the hamming distance.
+** DONE "The Art of computer programming"
+CLOSED: [2018-11-10 Sat 11:08]
+:PROPERTIES:
+  :EXPORT_FILE_NAME: the-art-of-computer-programming
+:END:
+The title of Donald Knuth's famed series [[https://en.wikipedia.org/wiki/The_Art_of_Computer_Programming][The Art of Computer Programming]] is
+often misunderstood, and as he describes in his talk [[https://dl.acm.org/citation.cfm?id=361612][Computer programming as an
+art]] which he delivered when he received the 1974 Turing award. I love this talk!
+I think that it offers a unique perspective on programming that can be very
+beneficial.
+
+Knuth starts his talk with an explanation of the difference between an art and a
+science through an etymologic analysis of the words. This seems to explain why
+the fields of medicine have historically been considered arts even though our
+modern perspective would consider them as sciences.
+
+I can resonate with Knuth's observation:
+#+BEGIN_QUOTE
+My feeling is that when we prepare a program, it can be like composing poetry or
+music; as Andrei Ershov has said, programming can give us both intellectual and
+emotional satisfaction, because it is a real achievement to master complexity
+and to establish a system of consist rules.
+#+END_QUOTE
+
+I believe that code can certainly be beautiful and the process of reducing a
+problem down into a set of explicit rules can be extremely satisfying (although
+at times, very frustrating). Many people consider programs to merely be a
+computational recipe that executes commands at the will of the programmer.
+However, I resonate much more with the idea of programming as "procedural
+epistomology," (from [[https://mitpress.mit.edu/sites/default/files/sicp/full-text/book/book-Z-H-4.html#%25_toc_start][Structure and Interpretation of Computer Programs]]) meaning
+that we construct programs to discover truth and use programs as a tool to
+justify our knowledge.
+
+I do have a hard time reconciling this idea of programming as "procedural
+epistomology," essentially idealistic programming for discovering truth, and
+pragmatic programming, programming to solve a problem. However, I think Knuth
+addresses this in his talk quite nicely when he states that "we shouldn't feel
+guilty about programs that are just for fun."
+
+I enjoy how Knuth addresses the inverse relationship between amount of resources
+and enjoyment of programming. The more constrained the resources in which we
+work under, the more we tend to enjoy the programs we write. I like the idea of
+working under contrived constraints as an exercise to increase our programming
+abilities. I have never done this, but I sure would like to try it sometime!
+
+In case you haven't read the talk, I would highly recommend it. I wonder if
+there is a video recording of him delivering it, I'm sure that it would be a
+pleasure to watch Knuth himself deliver it.
 
 * Footnotes
 * COMMENT Local Variables                          :ARCHIVE:
